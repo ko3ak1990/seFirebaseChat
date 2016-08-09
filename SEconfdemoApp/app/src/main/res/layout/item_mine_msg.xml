@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="end"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/chat_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <me.himanshusoni.chatmessageview.ChatMessageView
+            android:id="@+id/chatMessageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.7"
+            android:gravity="end"
+            app:cmv_arrowGravity="end"
+            app:cmv_arrowPosition="bottom"
+            app:cmv_backgroundColor="@color/chat_my_color"
+            app:cmv_backgroundColorPressed="#FFBABABA"
+            app:cmv_contentPadding="1dp"
+            app:cmv_cornerRadius="0dp"
+            app:cmv_showArrow="false">
+
+            <TextView
+                android:id="@+id/my_title_tv"
+                style="@style/Just.TextView.Title.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="Title"
+                android:textColor="@color/chat_text_title_color"
+                android:textSize="@dimen/text_size_title_super_small"/>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/my_title_tv"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/chat_divider_color"/>
+
+            <TextView
+                android:id="@+id/my_text_tv"
+                style="@style/Just.TextView.Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider"
+                android:paddingBottom="1dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="1dp"
+                android:text="Question"
+                android:textColor="@color/chat_text_color"
+                android:textSize="@dimen/text_size_title_small"/>
+        </me.himanshusoni.chatmessageview.ChatMessageView>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignEnd="@+id/chat_lay"
+        android:layout_alignRight="@+id/chat_lay"
+        android:layout_below="@+id/chat_lay"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-20dp"
+        android:background="@drawable/arrow_triangle_my"/>
+
+</RelativeLayout>

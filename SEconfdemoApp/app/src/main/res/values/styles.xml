@@ -1,0 +1,130 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/black_mixed</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Fullscreen" parent="@style/AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+    </style>
+
+    <style name="Just.Button.Green" parent="Just.Button">
+        <item name="android:background">@color/lime</item>
+        <item name="android:tag">black</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/white_mixed</item>
+        <item name="android:textSize">@dimen/text_size_title_large</item>
+    </style>
+
+    <style name="JustAvatarImageView">
+        <item name="android:layout_width">@dimen/chat_avatar_size</item>
+        <item name="android:layout_height">@dimen/chat_avatar_size</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="Just.Button" parent="android:Widget.Button">
+        <item name="android:textColor">@color/title_text_color</item>
+        <item name="android:textSize">@dimen/text_size_title_medium</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="Just.CheckBox" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="Just.TextView" parent="android:Widget.TextView" />
+
+    <style name="Just.Button.Arrow" parent="Just.Button">
+        <item name="android:layout_width">@dimen/slide_button_size</item>
+        <item name="android:layout_height">@dimen/slide_button_size</item>
+    </style>
+
+    <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.NoActionBar">
+
+    </style>
+
+    <style name="Just.TextView.Title.Small" parent="Just.TextView">
+        <item name="android:textColor">@color/title_text_color</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">@dimen/text_size_title_small</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:text">Title</item>
+    </style>
+
+    <style name="Just.TextView.Title" parent="Just.TextView">
+        <item name="android:textColor">@color/title_text_color</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">@dimen/text_size_title_medium</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:text">Title</item>
+    </style>
+
+    <style name="Just.TextView.SubTitle" parent="Just.TextView">
+        <item name="android:textColor">@color/title_text_color</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">@dimen/text_size_subtitle_medium</item>
+        <item name="android:text">Title</item>
+    </style>
+
+    <style name="Just.TextView.Description" parent="Just.TextView">
+        <item name="android:textColor">@color/descr_text_color</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">@dimen/text_size_descr</item>
+        <item name="android:text">Description</item>
+    </style>
+
+    <style name="Just.TextView.Description.Small" parent="Just.TextView">
+        <item name="android:textColor">@color/descr_text_color</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">@dimen/text_size_title_small</item>
+        <item name="android:text">Description</item>
+    </style>
+
+    <style name="DirectShareTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    <style name="DirectShareDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <declare-styleable name="StrokedTextViewStyle">
+    <attr name="strokeColor" format="color" />
+    <attr name="strokeWidth" format="integer"/>
+    </declare-styleable>
+
+</resources>

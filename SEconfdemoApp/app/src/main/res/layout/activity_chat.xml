@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary_black"
+                android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chat_recycle_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/chat_participant_view"/>
+
+    <TextView
+        android:id="@+id/emtyChat_tv"
+        style="@style/Just.TextView.Title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/chat_participant_view"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:maxLines="4"
+        android:tag="regular"
+        android:text="@string/start_your_conversation_here"
+        android:textSize="@dimen/text_size_title_mega"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:id="@+id/chat_participant_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/edtInput_lay"
+        android:background="@color/chat_users_lay_color"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="start">
+
+            <ImageView
+                android:id="@+id/justen_img_view"
+                style="@style/JustAvatarImageView"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="start|center"
+                android:tag="regular"
+                android:textColor="@color/white_mixed"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="end">
+
+            <TextView
+                android:id="@+id/user_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:gravity="end|center"
+                android:tag="regular"
+                android:text="user"
+                android:textColor="@color/white_mixed"/>
+
+            <ImageView
+                android:id="@+id/user_img_view"
+                style="@style/JustAvatarImageView"
+                android:src="@mipmap/ic_launcher"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/edtInput_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/chat_edit_lay_color"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/edtInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.7"
+            android:background="@color/white_mixed"
+            android:hint="@string/write_your_message_here"
+            android:imeOptions="actionSend|actionDone"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLength="2000"
+            android:maxLines="4"
+            android:padding="10dp"
+            android:tag="regular"/>
+
+        <include
+            android:id="@+id/send_msg_btn"
+            layout="@layout/view_send_msg"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:layout_weight="0.3"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+
+    defaultConfig {
+        applicationId "com.umanets.seconfdemoapp"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 3
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+    }
+}
+
+dependencies {
+
+    final PICASSO_VERSION = '2.5.2'
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    //SUPPORT ANDROID
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:recyclerview-v7:24.1.1'
+    compile 'com.android.support:design:24.1.1'
+
+
+
+    // LOCATION
+    compile 'com.google.android.gms:play-services-places:9.4.0'
+
+    // AUTH
+    compile 'com.google.android.gms:play-services-auth:9.4.0'
+    compile 'com.google.firebase:firebase-auth:9.4.0'
+
+    //DATABASE FIREBASE,UI
+    compile 'com.google.firebase:firebase-database:9.4.0'
+    compile 'com.firebaseui:firebase-ui-database:0.4.1'
+
+    //STORAGE FIREBASE
+    compile 'com.google.firebase:firebase-storage:9.4.0'
+
+    //CHAT UI
+    compile 'hani.momanii.supernova_emoji_library:supernova-emoji-library:0.0.2'
+    compile 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
+    compile "com.squareup.picasso:picasso:$PICASSO_VERSION"
+}
+
+apply plugin: 'com.google.gms.google-services'

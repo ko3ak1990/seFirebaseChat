@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">SE Firebase Demo App</string>
+
+    <string name="retry">Retry</string>
+    <string name="reply">Reply</string>
+    <string name="ok">OK</string>
+    <string name="email">Email</string>
+    <string name="pass">Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_retrieve_data">An error occurred. Could not retrieve data.</string>
+
+    <string name="contact_profile_avatar">contact profile avatar</string>
+    <string name="start_your_conversation_here">Start your conversation here</string>
+    <string name="send_msg">Send</string>
+
+    <string name="login_with_facebook">Login with Facebook</string>
+    <string name="logout_with_facebook">Log out with Facebook</string>
+    <string name="com_facebook_loginview_log_out_button">@string/login_with_facebook</string>
+    <string name="com_facebook_loginview_log_in_button">@string/logout_with_facebook</string>
+    <string name="logout">Logout</string>
+
+
+
+    <integer name="anim_duration_very_long">1500</integer>
+    <integer name="anim_duration_long">500</integer>
+    <integer name="anim_duration_medium">300</integer>
+
+
+
+    <string name="api_key_google_places">AIzaSyDeXSn0A-tdzdsFvWc56qJipXiqz0kXzrY</string>
+    <string name="sendPhoto">Photo Camera</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="select_picture_title">Get Photo From</string>
+    <string name="sendPhotoGallery">Photo Gallery</string>
+    <string name="sendLocation">Send Location</string>
+    <string name="locationTo">Location To</string>
+    <string name="write_your_message_here">Write your message here</string>
+
+</resources>

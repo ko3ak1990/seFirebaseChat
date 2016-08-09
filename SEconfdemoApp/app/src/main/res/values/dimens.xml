@@ -1,0 +1,64 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="list_video_small_width">200dp</dimen>
+    <dimen name="list_video_small_height">100dp</dimen>
+    <dimen name="list_video_small_margin">5dp</dimen>
+    <dimen name="chat_lay_height">50dp</dimen>
+    <dimen name="slide_button_size">80dp</dimen>
+    <dimen name="recycle_view_height">150dp</dimen>
+    <dimen name="play_small_btn_size">60dp</dimen>
+    <dimen name="start_button_size">35dp</dimen>
+    <dimen name="star_button_size">30dp</dimen>
+    <dimen name="video_big_image_view">250dp</dimen>
+    <dimen name="text_size_title_large">21sp</dimen>
+    <dimen name="text_size_title_mega">36sp</dimen>
+    <dimen name="text_size_subtitle_large">21sp</dimen>
+    <dimen name="text_size_title_medium">18sp</dimen>
+    <dimen name="text_size_title_small">14sp</dimen>
+    <dimen name="text_size_title_super_small">12sp</dimen>
+    <dimen name="text_size_subtitle_medium">14sp</dimen>
+    <dimen name="text_size_descr">18sp</dimen>
+    <dimen name="margin_tiny">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="margin_huge">64dp</dimen>
+    <dimen name="alert_dialog_size">264dp</dimen>
+
+    <dimen name="fb_margin_override_top">13dp</dimen>
+    <dimen name="fb_margin_override_bottom">13dp</dimen>
+    <!--The next value changes the margin between the FB icon and the left border:-->
+    <dimen name="fb_margin_override_lr">10dp</dimen>
+    <!--The next value changes the margin between the FB icon and the login text:-->
+    <dimen name="fb_margin_override_textpadding">17dp</dimen>
+
+    <!-- Semantic definitions -->
+
+    <dimen name="horizontal_page_margin">@dimen/margin_medium</dimen>
+    <dimen name="vertical_page_margin">@dimen/margin_medium</dimen>
+
+
+    <!-- SendMessageActivity -->
+
+    <string name="sending_message">Sending a message</string>
+    <string name="to">To:</string>
+    <string name="send">Send</string>
+    <string name="body">Body:</string>
+    <string name="hint_body">Edit your message.</string>
+    <string name="message_sent">Sent a message \"%1$s\" to %2$s.</string>
+    <string name="text_to_share">Text to share</string>
+    <dimen name="dialog_padding">24dp</dimen>
+    <dimen name="dialog_button_padding">8dp</dimen>
+    <dimen name="thumb_height">180dp</dimen>
+    <dimen name="buy_button_height">50dp</dimen>
+    <dimen name="buy_button_width">90dp</dimen>
+    <dimen name="pager_item_title_lay_height">140dp</dimen>
+    <dimen name="pager_item_title_lay_width">180dp</dimen>
+    <dimen name="chat_min_height">120dp</dimen>
+    <dimen name="msg_circle_size">20dp</dimen>
+    <dimen name="video_scroll_bar_size">10dp</dimen>
+    <dimen name="chat_avatar_size">30dp</dimen>
+    <dimen name="thumb_text_size">26sp</dimen>
+</resources>
