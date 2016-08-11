@@ -20,7 +20,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.umanets.seconfdemoapp.MainActivity;
+import com.umanets.seconfdemoapp.ui.chat.MainActivity;
 import com.umanets.seconfdemoapp.R;
 import com.umanets.seconfdemoapp.Util;
 

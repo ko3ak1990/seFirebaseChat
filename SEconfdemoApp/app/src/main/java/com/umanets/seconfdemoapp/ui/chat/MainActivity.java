@@ -1,4 +1,4 @@
-package com.umanets.seconfdemoapp;
+package com.umanets.seconfdemoapp.ui.chat;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -33,6 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.umanets.seconfdemoapp.R;
+import com.umanets.seconfdemoapp.Util;
 import com.umanets.seconfdemoapp.model.FileModel;
 import com.umanets.seconfdemoapp.model.MapModel;
 import com.umanets.seconfdemoapp.model.MessageModel;
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             finish();
         }else{
             bindViews();
-            verificaUsuarioLogado();
+            verifyUserLoggined();
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .enableAutoManage(this, this)
                     .addApi(Auth.GOOGLE_SIGN_IN_API)
@@ -197,19 +199,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     /**
-     * Envia o arvquivo para o firebase
+     * Launch Upload Task via URI
      */
     private void sendFileFirebase(StorageReference storageReference, final Uri file){
         if (storageReference != null){
             final String name = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
             StorageReference imageGalleryRef = storageReference.child(name+"_gallery");
             UploadTask uploadTask = imageGalleryRef.putFile(file);
-            uploadTask.addOnFailureListener(new OnFailureListener() {
+            uploadTask.addOnFailureListener(this,new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.e(TAG,"onFailure sendFileFirebase "+e.getMessage());
                 }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            }).addOnSuccessListener(this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Log.i(TAG,"onSuccess sendFileFirebase");
@@ -226,17 +228,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     /**
-     * Envia o arvquivo para o firebase
+     * Launch Upload Task via File
      */
     private void sendFileFirebase(StorageReference storageReference, final File file){
         if (storageReference != null){
             UploadTask uploadTask = storageReference.putFile(Uri.fromFile(file));
-            uploadTask.addOnFailureListener(new OnFailureListener() {
+            uploadTask.addOnFailureListener(this,new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.e(TAG,"onFailure sendFileFirebase "+e.getMessage());
                 }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            }).addOnSuccessListener(this,new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Log.i(TAG,"onSuccess sendFileFirebase");
@@ -253,7 +255,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     /**
-     * Obter local do usuario
+     * launch Place Picker
      */
     private void locationPlacesIntent(){
         try {
@@ -265,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     /**
-     * Enviar foto tirada pela camera
+     * Launch Counter
      */
     private void photoCameraIntent(){
         String nomeFoto = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
@@ -276,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     /**
-     * Enviar foto pela galeria
+     * Launch Gallery
      */
     private void photoGalleryIntent(){
         Intent intent = new Intent();
@@ -295,9 +297,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     /**
-     * Ler collections chatmodel Firebase
+     * Read collections chatmodel Firebase
      */
-    private void lerMessagensFirebase(){
+    private void readMessagensFirebase(){
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://setestapp-7b495.firebaseio.com/");
         final ChatAdapter firebaseAdapter = new ChatAdapter(mFirebaseDatabaseReference.child(CHAT_REFERENCE),userModel.getName(),this);
         firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
@@ -318,9 +320,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     /**
-     * Verificar se usuario está logado
+     * Verify User Loggined
      */
-    private void verificaUsuarioLogado(){
+    private void verifyUserLoggined(){
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         if (mFirebaseUser == null){
@@ -328,12 +330,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             finish();
         }else{
             userModel = new UserModel(mFirebaseUser.getDisplayName(), mFirebaseUser.getPhotoUrl().toString(), mFirebaseUser.getUid() );
-            lerMessagensFirebase();
+            readMessagensFirebase();
         }
     }
 
     /**
-     * Vincular views com Java API
+     * Use Butterknife
      */
     private void bindViews(){
         contentRoot = findViewById(R.id.contentRoot);

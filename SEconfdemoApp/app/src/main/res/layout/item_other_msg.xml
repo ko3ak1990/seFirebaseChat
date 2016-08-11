@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_gravity="start"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
@@ -35,7 +36,7 @@
 
 
             <TextView
-                android:id="@+id/other_title_tv"
+                android:id="@+id/title_tv"
                 style="@style/Just.TextView.Title.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,13 +50,13 @@
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/other_title_tv"
+                android:layout_below="@+id/title_tv"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="@color/chat_divider_color"/>
 
             <TextView
-                android:id="@+id/other_text_tv"
+                android:id="@+id/chat_msg_text_tv"
                 style="@style/Just.TextView.Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,6 +67,33 @@
                 android:paddingTop="1dp"
                 android:textColor="@color/chat_text_color"
                 android:textSize="@dimen/text_size_title_small"/>
+
+            <ImageView
+                android:layout_above="@+id/timestamp"
+                android:layout_below="@+id/chat_msg_text_tv"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:src="@mipmap/ic_launcher"
+                android:id="@+id/img_chat"
+                android:minWidth="100dp"
+                android:minHeight="100dp"
+                android:maxWidth="150dp"
+                android:maxHeight="150dp"
+                android:background="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:text="22/06/2016"
+                android:id="@+id/timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_chat"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:layout_alignParentLeft="true"
+                android:textSize="10sp" />
+
         </me.himanshusoni.chatmessageview.ChatMessageView>
     </LinearLayout>
 

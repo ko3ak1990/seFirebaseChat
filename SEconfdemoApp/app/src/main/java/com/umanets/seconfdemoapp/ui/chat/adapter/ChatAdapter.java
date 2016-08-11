@@ -1,6 +1,7 @@
 package com.umanets.seconfdemoapp.ui.chat.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +16,6 @@ import com.umanets.seconfdemoapp.R;
 import com.umanets.seconfdemoapp.Util;
 import com.umanets.seconfdemoapp.model.MessageModel;
 
-import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
-
 /**
  * Created by Евгений on 03.04.2016.
  */
@@ -24,9 +23,6 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
 
     private static final int RIGHT_MSG = 0;
     private static final int LEFT_MSG = 1;
-    private static final int RIGHT_MSG_IMG = 2;
-    private static final int LEFT_MSG_IMG = 3;
-
     private ChatClickListener mChatClickListener;
 
     private String nameUser;
@@ -42,16 +38,10 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
     public MyChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
         if (viewType == RIGHT_MSG) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_right, parent, false);
-            return new MyChatViewHolder(view);
-        } else if (viewType == LEFT_MSG) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_left, parent, false);
-            return new MyChatViewHolder(view);
-        } else if (viewType == RIGHT_MSG_IMG) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_right_img, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mine_msg, parent, false);
             return new MyChatViewHolder(view);
         } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_left_img, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_other_msg, parent, false);
             return new MyChatViewHolder(view);
         }
     }
@@ -61,15 +51,12 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
         MessageModel model = getItem(position);
         if (model.getMapModel() != null) {
             if (model.getUserModel().getName().equals(nameUser)) {
-                return RIGHT_MSG_IMG;
+                return RIGHT_MSG;
             } else {
-                return LEFT_MSG_IMG;
+                return LEFT_MSG;
             }
-        } else if (model.getUserModel().getName().equals(nameUser)) {
-            return RIGHT_MSG;
-        } else {
-            return LEFT_MSG;
         }
+        return LEFT_MSG;
     }
 
     @Override
@@ -90,13 +77,13 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
     public class MyChatViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView tvTimestamp, tvLocation;
-        EmojiconTextView txtMessage;
+        TextView txtMessage;
         ImageView ivUser, ivChatPhoto;
 
         public MyChatViewHolder(View itemView) {
             super(itemView);
             tvTimestamp = (TextView) itemView.findViewById(R.id.timestamp);
-            txtMessage = (EmojiconTextView) itemView.findViewById(R.id.txtMessage);
+            txtMessage = (TextView) itemView.findViewById(R.id.chat_msg_text_tv);
             tvLocation = (TextView) itemView.findViewById(R.id.tvLocation);
             ivChatPhoto = (ImageView) itemView.findViewById(R.id.img_chat);
             ivUser = (ImageView) itemView.findViewById(R.id.ivUserChat);
@@ -120,7 +107,7 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
 
         public void setIvUser(String urlPhotoUser) {
             if (ivUser == null) return;
-            Picasso.with(ivUser.getContext()).load(urlPhotoUser).centerCrop().resize(40,40).into(ivUser);
+            Picasso.with(ivUser.getContext()).load(urlPhotoUser).centerCrop().resize(40, 40).into(ivUser);
         }
 
         public void setTvTimestamp(String timestamp) {
@@ -130,10 +117,15 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
 
         public void setIvChatPhoto(String url) {
             if (ivChatPhoto == null) return;
-            Picasso.with(ivChatPhoto.getContext()).load(url)
-                    .resize(100, 100).centerCrop()
-                    .into(ivChatPhoto);
-            ivChatPhoto.setOnClickListener(this);
+            if (!TextUtils.isEmpty(url)) {
+                Picasso.with(ivChatPhoto.getContext()).load(url)
+                        .resize(100, 100).centerCrop()
+                        .into(ivChatPhoto);
+                ivChatPhoto.setOnClickListener(this);
+                ivChatPhoto.setVisibility(View.VISIBLE);
+            } else {
+                ivChatPhoto.setVisibility(View.GONE);
+            }
         }
 
         public void tvIsLocation(int visible) {
@@ -144,7 +136,8 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
     }
 
     private CharSequence converteTimestamp(String mileSegundos) {
-        return DateUtils.getRelativeTimeSpanString(Long.parseLong(mileSegundos), System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+        return DateUtils.getRelativeTimeSpanString(Long.parseLong(mileSegundos),
+                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
     }
 
 

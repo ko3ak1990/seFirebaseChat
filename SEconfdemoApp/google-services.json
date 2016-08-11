@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "493831357082-8fs5odtukfdmrtjvtqk9ba0af70ik5c8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umanets.seconfdemoapp",
+            "certificate_hash": "EBF7DFE1F4F1E81CD6D4D4F0BAD15E81A8E40C0C"
+          }
+        },
+        {
           "client_id": "493831357082-tvtj5hb9ti2l22vvcddjeqlsa7bqrk92.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -11,8 +11,17 @@
                 android:paddingRight="10dp"
     >
 
+    <ImageView
+        android:id="@+id/ivUserChat"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/chat_lay"/>
 
     <LinearLayout
+        android:layout_toLeftOf="@+id/ivUserChat"
+        android:layout_toStartOf="@+id/ivUserChat"
         android:id="@+id/chat_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +47,7 @@
             app:cmv_showArrow="false">
 
             <TextView
-                android:id="@+id/my_title_tv"
+                android:id="@+id/title_tv"
                 style="@style/Just.TextView.Title.Small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,7 +67,7 @@
                 android:background="@color/chat_divider_color"/>
 
             <TextView
-                android:id="@+id/my_text_tv"
+                android:id="@+id/chat_msg_text_tv"
                 style="@style/Just.TextView.Description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -70,7 +79,44 @@
                 android:text="Question"
                 android:textColor="@color/chat_text_color"
                 android:textSize="@dimen/text_size_title_small"/>
+
+            <ImageView
+                android:id="@+id/img_chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#000"
+                android:maxHeight="150dp"
+                android:maxWidth="150dp"
+                android:minHeight="100dp"
+                android:minWidth="100dp"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_chat"
+                android:layout_marginTop="2dp"
+                android:text="@string/location_received"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
+
+            <TextView
+                android:id="@+id/timestamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/chat_msg_text_tv"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:text="22/06/2016"
+                android:textSize="10sp"/>
+
+
         </me.himanshusoni.chatmessageview.ChatMessageView>
+
 
     </LinearLayout>
 
