@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         if (!Util.verificaConexao(this)){
-            Util.initToast(this,"Você não tem conexão com internet");
+            Util.initToast(this,getString(R.string.no_internet));
             finish();
         }
 

@@ -36,5 +36,6 @@
     <string name="locationTo">Location To</string>
     <string name="write_your_message_here">Write your message here</string>
     <string name="location_received">Location Received</string>
+    <string name="no_internet">Sorry,no internet connection</string>
 
 </resources>

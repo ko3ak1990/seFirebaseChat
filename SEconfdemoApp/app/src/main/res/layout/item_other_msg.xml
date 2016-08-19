@@ -68,33 +68,42 @@
                 android:textColor="@color/chat_text_color"
                 android:textSize="@dimen/text_size_title_small"/>
 
-            <ImageView
-                android:layout_above="@+id/timestamp"
+
+            <LinearLayout
                 android:layout_below="@+id/chat_msg_text_tv"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
                 tools:visibility="visible"
-                android:visibility="gone"
                 android:src="@mipmap/ic_launcher"
                 android:id="@+id/img_chat"
                 android:minWidth="100dp"
                 android:minHeight="100dp"
                 android:maxWidth="150dp"
                 android:maxHeight="150dp"
-                android:background="#000"
+                tools:background="#000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text="22/06/2016"
                 android:id="@+id/timestamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/img_chat"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="bottom|right"
                 android:layout_marginTop="5dp"
                 android:padding="10dp"
-                android:layout_alignParentLeft="true"
-                android:textSize="10sp" />
+                android:text="22/06/2016"
+                android:textSize="10sp"/>
+
+            </LinearLayout>
 
         </me.himanshusoni.chatmessageview.ChatMessageView>
+
+
     </LinearLayout>
 
     <View

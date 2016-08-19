@@ -49,7 +49,7 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
     @Override
     public int getItemViewType(int position) {
         MessageModel model = getItem(position);
-        if (model.getMapModel() != null) {
+        if (model!= null) {
             if (model.getUserModel().getName().equals(nameUser)) {
                 return RIGHT_MSG;
             } else {
@@ -61,32 +61,33 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
 
     @Override
     protected void populateViewHolder(MyChatViewHolder viewHolder, MessageModel model, int position) {
-        viewHolder.setIvUser(model.getUserModel().getPhoto_profile());
-        viewHolder.setTxtMessage(model.getMessage());
-        viewHolder.setTvTimestamp(model.getTimeStamp());
-        viewHolder.tvIsLocation(View.GONE);
+        viewHolder.setUserImgView(model.getUserModel().getPhoto_profile());
+        viewHolder.setMessageTexView(model.getMessage());
+        viewHolder.setTimestampTexView(model.getTimeStamp());
+        viewHolder.setLocationImgVisibility(View.GONE);
+        viewHolder.setChatImgVisibility(View.GONE);
         if (model.getFile() != null) {
-            viewHolder.tvIsLocation(View.GONE);
-            viewHolder.setIvChatPhoto(model.getFile().getUrl_file());
+            viewHolder.setLocationImgVisibility(View.GONE);
+            viewHolder.setChatMsgImgView(model.getFile().getUrl_file());
         } else if (model.getMapModel() != null) {
-            viewHolder.setIvChatPhoto(Util.local(model.getMapModel().getLatitude(), model.getMapModel().getLongitude()));
-            viewHolder.tvIsLocation(View.VISIBLE);
+            viewHolder.setChatMsgImgView(Util.local(model.getMapModel().getLatitude(), model.getMapModel().getLongitude()));
+            viewHolder.setLocationImgVisibility(View.VISIBLE);
         }
     }
 
     public class MyChatViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        TextView tvTimestamp, tvLocation;
-        TextView txtMessage;
-        ImageView ivUser, ivChatPhoto;
+        TextView mTimestampTexView, mLocationTexView;
+        TextView mMessageTexView;
+        ImageView mUserImgView, mChatMsgImgView;
 
         public MyChatViewHolder(View itemView) {
             super(itemView);
-            tvTimestamp = (TextView) itemView.findViewById(R.id.timestamp);
-            txtMessage = (TextView) itemView.findViewById(R.id.chat_msg_text_tv);
-            tvLocation = (TextView) itemView.findViewById(R.id.tvLocation);
-            ivChatPhoto = (ImageView) itemView.findViewById(R.id.img_chat);
-            ivUser = (ImageView) itemView.findViewById(R.id.ivUserChat);
+            mTimestampTexView = (TextView) itemView.findViewById(R.id.timestamp);
+            mMessageTexView = (TextView) itemView.findViewById(R.id.chat_msg_text_tv);
+            mLocationTexView = (TextView) itemView.findViewById(R.id.tvLocation);
+            mChatMsgImgView = (ImageView) itemView.findViewById(R.id.img_chat);
+            mUserImgView = (ImageView) itemView.findViewById(R.id.ivUserChat);
         }
 
         @Override
@@ -100,37 +101,42 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
             }
         }
 
-        public void setTxtMessage(String message) {
-            if (txtMessage == null) return;
-            txtMessage.setText(message);
+        public void setMessageTexView(String message) {
+            if (mMessageTexView == null) return;
+            mMessageTexView.setText(message);
         }
 
-        public void setIvUser(String urlPhotoUser) {
-            if (ivUser == null) return;
-            Picasso.with(ivUser.getContext()).load(urlPhotoUser).centerCrop().resize(40, 40).into(ivUser);
+        public void setUserImgView(String urlPhotoUser) {
+            if (mUserImgView == null) return;
+            Picasso.with(mUserImgView.getContext()).load(urlPhotoUser).centerCrop().resize(40, 40).into(mUserImgView);
         }
 
-        public void setTvTimestamp(String timestamp) {
-            if (tvTimestamp == null) return;
-            tvTimestamp.setText(converteTimestamp(timestamp));
+        public void setTimestampTexView(String timestamp) {
+            if (mTimestampTexView == null) return;
+            mTimestampTexView.setText(converteTimestamp(timestamp));
         }
 
-        public void setIvChatPhoto(String url) {
-            if (ivChatPhoto == null) return;
+        public void setChatMsgImgView(String url) {
+            if (mChatMsgImgView == null) return;
             if (!TextUtils.isEmpty(url)) {
-                Picasso.with(ivChatPhoto.getContext()).load(url)
+                Picasso.with(mChatMsgImgView.getContext()).load(url)
                         .resize(100, 100).centerCrop()
-                        .into(ivChatPhoto);
-                ivChatPhoto.setOnClickListener(this);
-                ivChatPhoto.setVisibility(View.VISIBLE);
+                        .into(mChatMsgImgView);
+                mChatMsgImgView.setOnClickListener(this);
+                mChatMsgImgView.setVisibility(View.VISIBLE);
             } else {
-                ivChatPhoto.setVisibility(View.GONE);
+                mChatMsgImgView.setVisibility(View.GONE);
             }
         }
 
-        public void tvIsLocation(int visible) {
-            if (tvLocation == null) return;
-            tvLocation.setVisibility(visible);
+        public void setLocationImgVisibility(int visible) {
+            if (mLocationTexView == null) return;
+            mLocationTexView.setVisibility(visible);
+        }
+
+        public void setChatImgVisibility(int visible) {
+            if (mChatMsgImgView == null) return;
+            mChatMsgImgView.setVisibility(visible);
         }
 
     }
