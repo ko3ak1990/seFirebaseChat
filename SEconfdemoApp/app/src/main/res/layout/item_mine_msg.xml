@@ -14,7 +14,7 @@
     >
 
     <ImageView
-        android:id="@+id/ivUserChat"
+        android:id="@+id/image_ava"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_alignParentEnd="true"
@@ -22,8 +22,8 @@
         android:layout_alignBottom="@+id/chat_lay"/>
 
     <LinearLayout
-        android:layout_toLeftOf="@+id/ivUserChat"
-        android:layout_toStartOf="@+id/ivUserChat"
+        android:layout_toLeftOf="@+id/image_ava"
+        android:layout_toStartOf="@+id/image_ava"
         android:id="@+id/chat_lay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

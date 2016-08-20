@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (!Util.verificaConexao(this)){
+        if (!Util.checkConnection(this)){
             Util.initToast(this,getString(R.string.no_internet));
             finish();
         }
@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
-       // Util.initToast(this,"Google Play Services error.");
+        Util.initToast(this,"Google Play Services error.");
     }
 
     private void signIn() {
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
-                           // Util.initToast(LoginActivity.this,"Authentication failed");
+                            Util.initToast(LoginActivity.this,"Authentication failed");
                         } else {
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             finish();

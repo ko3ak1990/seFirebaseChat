@@ -37,5 +37,6 @@
     <string name="write_your_message_here">Write your message here</string>
     <string name="location_received">Location Received</string>
     <string name="no_internet">Sorry,no internet connection</string>
+    <string name="check_connection">syncing error,check your connection</string>
 
 </resources>

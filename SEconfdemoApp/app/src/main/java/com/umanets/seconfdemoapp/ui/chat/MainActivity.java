@@ -14,7 +14,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.EditText;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
@@ -47,8 +47,6 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener, ChatClickListener {
@@ -58,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private static final int PLACE_PICKER_REQUEST = 3;
 
     static final String TAG = MainActivity.class.getSimpleName();
+    //DB name
     static final String CHAT_REFERENCE = "messageModel";
     public static final String AVA_URL_DEFAULT = "https://cdn4.iconfinder.com/data/icons/gray-user-management/512/rounded-512.png";
 
@@ -74,10 +73,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     //Views UI
     private RecyclerView rvListMessage;
     private LinearLayoutManager mLinearLayoutManager;
-    private ImageView btSendMessage, btEmoji;
-    private EmojiconEditText edMessage;
+    private View btSendMessage;
+    private EditText edMessage;
     private View contentRoot;
-    private EmojIconActions emojIcon;
+
 
     //File
     private File filePathImageCamera;
@@ -86,8 +85,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (!Util.verificaConexao(this)) {
-            Util.initToast(this, "Você não tem conexão com internet");
+        if (!Util.checkConnection(this)) {
+            Util.initToast(this, getString(R.string.check_connection));
             finish();
         } else {
             bindViews();
@@ -109,8 +108,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 Uri selectedImageUri = data.getData();
                 if (selectedImageUri != null) {
                     sendFileFirebase(storageRef, selectedImageUri);
-                } else {
-                    //URI IS NULL
                 }
             }
         } else if (requestCode == IMAGE_CAMERA_REQUEST) {
@@ -118,8 +115,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 if (filePathImageCamera != null && filePathImageCamera.exists()) {
                     StorageReference imageCameraRef = storageRef.child(filePathImageCamera.getName() + "_camera");
                     sendFileFirebase(imageCameraRef, filePathImageCamera);
-                } else {
-                    //IS NULL
                 }
             }
         } else if (requestCode == PLACE_PICKER_REQUEST) {
@@ -130,8 +125,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     MapModel mapModel = new MapModel(latLng.latitude + "", latLng.longitude + "");
                     MessageModel messageModel = new MessageModel(userModel, Calendar.getInstance().getTime().getTime() + "", mapModel);
                     mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(messageModel);
-                } else {
-                    //PLACE IS NULL
                 }
             }
         }
@@ -146,7 +139,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.sendPhoto:
                 photoCameraIntent();
@@ -216,13 +208,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Log.i(TAG, "onSuccess sendFileFirebase");
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    FileModel fileModel = new FileModel("img", downloadUrl.toString(), name, "");
-                    MessageModel messageModel = new MessageModel(userModel, "", Calendar.getInstance().getTime().getTime() + "", fileModel);
-                    mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(messageModel);
+                    if(downloadUrl!=null) {
+                        FileModel fileModel = new FileModel("img", downloadUrl.toString(), name, "");
+                        MessageModel messageModel = new MessageModel(userModel, "", Calendar.getInstance().getTime().getTime() + "", fileModel);
+                        mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(messageModel);
+                    }
                 }
             });
         } else {
-            //IS NULL
+            //OOPS URI IS NULL
         }
 
     }
@@ -296,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         MessageModel model = new MessageModel(userModel, edMessage.getText().toString(), Calendar.getInstance().getTime().getTime() + "", null);
         mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(model);
         edMessage.setText(null);
+        Util.hideKeyboard(this);
     }
 
     /**
@@ -335,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             if (mFirebaseUser.getPhotoUrl() != null) {
                 avaUrl = mFirebaseUser.getPhotoUrl().toString();
             }
-            userModel = new UserModel(mFirebaseUser.getDisplayName(), avaUrl, mFirebaseUser.getUid());
+            userModel = new UserModel(mFirebaseUser.getUid(),mFirebaseUser.getDisplayName(), avaUrl);
             readMessagensFirebase();
         }
     }
@@ -345,17 +340,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
      */
     private void bindViews() {
         contentRoot = findViewById(R.id.contentRoot);
-        edMessage = (EmojiconEditText) findViewById(R.id.editTextMessage);
-        btSendMessage = (ImageView) findViewById(R.id.buttonMessage);
+        edMessage = (EditText) findViewById(R.id.mesageEditText);
+        btSendMessage = findViewById(R.id.buttonMessage);
         btSendMessage.setOnClickListener(this);
-        btEmoji = (ImageView) findViewById(R.id.buttonEmoji);
         rvListMessage = (RecyclerView) findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
     }
 
     /**
-     * Sign Out no login
+     * Sign Out
      */
     private void signOut() {
         mFirebaseAuth.signOut();

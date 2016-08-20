@@ -28,35 +28,40 @@ android {
 dependencies {
 
     final PICASSO_VERSION = '2.5.2'
+    final PICASSO_TRANSFORM_VERSION = '2.1.0'
+    final CHAT_VIEW = "1.0.3"
+    final PLAY_SERVICES = "9.4.0"
+    final FIREBASE_UI_DB = "0.4.1"
+    final SUPPORT_VERSION = "24.2.0"
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     //SUPPORT ANDROID
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.android.support:recyclerview-v7:24.1.1'
-    compile 'com.android.support:design:24.1.1'
+    compile "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    compile "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    compile "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    compile "com.android.support:design:$SUPPORT_VERSION"
 
 
 
     // LOCATION
-    compile 'com.google.android.gms:play-services-places:9.4.0'
+    compile "com.google.android.gms:play-services-places:$PLAY_SERVICES"
 
     // AUTH
-    compile 'com.google.android.gms:play-services-auth:9.4.0'
-    compile 'com.google.firebase:firebase-auth:9.4.0'
+    compile "com.google.android.gms:play-services-auth:$PLAY_SERVICES"
+    compile "com.google.firebase:firebase-auth:$PLAY_SERVICES"
 
     //DATABASE FIREBASE,UI
-    compile 'com.google.firebase:firebase-database:9.4.0'
-    compile 'com.firebaseui:firebase-ui-database:0.4.1'
+    compile "com.google.firebase:firebase-database:$PLAY_SERVICES"
+    compile "com.firebaseui:firebase-ui-database:$FIREBASE_UI_DB"
 
     //STORAGE FIREBASE
-    compile 'com.google.firebase:firebase-storage:9.4.0'
+    compile "com.google.firebase:firebase-storage:$PLAY_SERVICES"
 
     //CHAT UI
-    compile 'hani.momanii.supernova_emoji_library:supernova-emoji-library:0.0.2'
-    compile 'me.himanshusoni.chatmessageview:chat-message-view:1.0.3'
+    compile "me.himanshusoni.chatmessageview:chat-message-view:$CHAT_VIEW"
     compile "com.squareup.picasso:picasso:$PICASSO_VERSION"
+    compile "jp.wasabeef:picasso-transformations:$PICASSO_TRANSFORM_VERSION"
 }
 
 apply plugin: 'com.google.gms.google-services'

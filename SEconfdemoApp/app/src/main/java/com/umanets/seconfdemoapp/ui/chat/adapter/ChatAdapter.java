@@ -16,6 +16,8 @@ import com.umanets.seconfdemoapp.R;
 import com.umanets.seconfdemoapp.Util;
 import com.umanets.seconfdemoapp.model.MessageModel;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 /**
  * Created by Евгений on 03.04.2016.
  */
@@ -29,7 +31,7 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
 
 
     public ChatAdapter(DatabaseReference ref, String nameUser, ChatClickListener mChatClickListener) {
-        super(MessageModel.class, R.layout.item_message_left, ChatAdapter.MyChatViewHolder.class, ref);
+        super(MessageModel.class, R.layout.item_mine_msg, ChatAdapter.MyChatViewHolder.class, ref);
         this.nameUser = nameUser;
         this.mChatClickListener = mChatClickListener;
     }
@@ -49,7 +51,7 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
     @Override
     public int getItemViewType(int position) {
         MessageModel model = getItem(position);
-        if (model!= null) {
+        if (model != null) {
             if (model.getUserModel().getName().equals(nameUser)) {
                 return RIGHT_MSG;
             } else {
@@ -64,6 +66,7 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
         viewHolder.setUserImgView(model.getUserModel().getPhoto_profile());
         viewHolder.setMessageTexView(model.getMessage());
         viewHolder.setTimestampTexView(model.getTimeStamp());
+        viewHolder.setTitleTextView(model.getUserModel().getName());
         viewHolder.setLocationImgVisibility(View.GONE);
         viewHolder.setChatImgVisibility(View.GONE);
         if (model.getFile() != null) {
@@ -79,15 +82,16 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
 
         TextView mTimestampTexView, mLocationTexView;
         TextView mMessageTexView;
+        TextView mTitleTextView;
         ImageView mUserImgView, mChatMsgImgView;
 
         public MyChatViewHolder(View itemView) {
             super(itemView);
             mTimestampTexView = (TextView) itemView.findViewById(R.id.timestamp);
+            mTitleTextView = (TextView) itemView.findViewById(R.id.title_tv);
             mMessageTexView = (TextView) itemView.findViewById(R.id.chat_msg_text_tv);
-            mLocationTexView = (TextView) itemView.findViewById(R.id.tvLocation);
             mChatMsgImgView = (ImageView) itemView.findViewById(R.id.img_chat);
-            mUserImgView = (ImageView) itemView.findViewById(R.id.ivUserChat);
+            mUserImgView = (ImageView) itemView.findViewById(R.id.image_ava);
         }
 
         @Override
@@ -101,6 +105,12 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
             }
         }
 
+        public void setTitleTextView(String message) {
+            if (mTitleTextView == null) return;
+            mTitleTextView.setText(message);
+        }
+
+
         public void setMessageTexView(String message) {
             if (mMessageTexView == null) return;
             mMessageTexView.setText(message);
@@ -108,7 +118,8 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
 
         public void setUserImgView(String urlPhotoUser) {
             if (mUserImgView == null) return;
-            Picasso.with(mUserImgView.getContext()).load(urlPhotoUser).centerCrop().resize(40, 40).into(mUserImgView);
+            Picasso.with(mUserImgView.getContext()).load(urlPhotoUser).centerCrop().resize(40, 40)
+                    .transform(new CropCircleTransformation()).into(mUserImgView);
         }
 
         public void setTimestampTexView(String timestamp) {
@@ -142,8 +153,9 @@ public class ChatAdapter extends FirebaseRecyclerAdapter<MessageModel, ChatAdapt
     }
 
     private CharSequence converteTimestamp(String mileSegundos) {
-        return DateUtils.getRelativeTimeSpanString(Long.parseLong(mileSegundos),
+        CharSequence charSequence = DateUtils.getRelativeTimeSpanString(Long.parseLong(mileSegundos),
                 System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS);
+        return charSequence.equals("0")?"1":charSequence;
     }
 
 

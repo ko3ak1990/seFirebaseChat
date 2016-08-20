@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "493831357082-8fs5odtukfdmrtjvtqk9ba0af70ik5c8.apps.googleusercontent.com",
+          "client_id": "493831357082-m9q4o46cq25vq3hctbaabcp5umcsqf9f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umanets.seconfdemoapp",
+            "certificate_hash": "3A99DBC5950307ED4D8AFDA79FB6522ABFA69A62"
+          }
+        },
+        {
+          "client_id": "493831357082-uct0hhgpehmj64m9eb3rdcsmd2n9r3ti.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.umanets.seconfdemoapp",
             "certificate_hash": "EBF7DFE1F4F1E81CD6D4D4F0BAD15E81A8E40C0C"
-          }
-        },
-        {
-          "client_id": "493831357082-tvtj5hb9ti2l22vvcddjeqlsa7bqrk92.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.umanets.seconfdemoapp",
-            "certificate_hash": "2D1BA3BFC4E675120620F0B3FC342E2163373317"
           }
         },
         {

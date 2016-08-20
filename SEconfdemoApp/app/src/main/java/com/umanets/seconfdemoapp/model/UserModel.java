@@ -31,7 +31,7 @@ public class UserModel {
     }
 
     private String name;
-    public UserModel(){};
+    public UserModel(){}
 
     public UserModel(String id, String name, String photo_profile) {
         this.id = id;
